@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="Tosca_500">#2B637B</color>
+    <color name="Tosca_200">#91c3d9</color>
+    <color name="light_grey">#77686777</color>
 </resources>
