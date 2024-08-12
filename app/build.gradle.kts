@@ -65,9 +65,6 @@ dependencies {
     //paging
     implementation(libs.androidx.paging.runtime.ktx)
 
-    //material
-    implementation (libs.material.v140)
-
     //swiperefresh
     implementation(libs.androidx.swiperefreshlayout)
 
