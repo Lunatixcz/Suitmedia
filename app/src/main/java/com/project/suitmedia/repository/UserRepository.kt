@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.PagingSource
 import androidx.paging.liveData
 import com.project.suitmedia.api.ApiService
 import com.project.suitmedia.api.UserResponseItem
@@ -12,6 +13,9 @@ import com.project.suitmedia.data.UserPagingSource
 
 class UserRepository (
     private val apiService: ApiService) {
+
+    private var currentPagingSource: PagingSource<*, *>? = null
+
 
     fun getUsers() : LiveData<PagingData<UserResponseItem>> {
         Log.d("UserRepository", "getUsers called")
@@ -23,5 +27,9 @@ class UserRepository (
                 UserPagingSource(apiService)
             }
         ).liveData
+    }
+
+    fun refresh() {
+        currentPagingSource?.invalidate()
     }
 }

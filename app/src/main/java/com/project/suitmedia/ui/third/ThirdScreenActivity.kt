@@ -45,6 +45,11 @@ class ThirdScreenActivity : AppCompatActivity() {
         }
         setupRecycleView()
 
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.refreshUsers()
+            binding.swipeRefresh.isRefreshing = false
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -60,6 +65,7 @@ class ThirdScreenActivity : AppCompatActivity() {
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
         }
+
         binding.rvUserList.layoutManager = LinearLayoutManager(this)
         binding.rvUserList.adapter = adapter.withLoadStateFooter(
             footer = LoadingStateAdapter {
@@ -67,19 +73,28 @@ class ThirdScreenActivity : AppCompatActivity() {
             }
         )
 
-        viewModel.user.observe(this) {pagingData ->
+        viewModel.user.observe(this) { pagingData ->
             Log.d("ThirdScreenActivity", "user data updated")
             adapter.submitData(lifecycle, pagingData)
         }
 
         adapter.addLoadStateListener { loadState ->
-            if (loadState.refresh is LoadState.Loading) {
-                showLoading(true)
-            } else {
-                showLoading(false)
-            }
+            showLoading(loadState.refresh is LoadState.Loading)
+
+            val isListEmpty = loadState.refresh is LoadState.NotLoading &&
+                    adapter.itemCount == 0
+
+            binding.tvEmpty.visibility = if (isListEmpty) View.VISIBLE else View.GONE
+            binding.rvUserList.visibility = if (isListEmpty) View.GONE else View.VISIBLE
+
+        }
+
+        binding.swipeRefresh.setOnRefreshListener {
+            adapter.refresh()
+            binding.swipeRefresh.isRefreshing = false
         }
     }
+
 
     private fun showLoading(isLoading : Boolean){
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE

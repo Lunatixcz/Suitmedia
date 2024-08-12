@@ -68,6 +68,9 @@ dependencies {
     //material
     implementation (libs.material.v140)
 
+    //swiperefresh
+    implementation(libs.androidx.swiperefreshlayout)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
