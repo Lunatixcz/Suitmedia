@@ -11,7 +11,7 @@ data class UserResponse(
 	val total: Int? = null,
 
 	@field:SerializedName("data")
-	val data: List<DataItem?>? = null,
+	val data: List<UserResponseItem>,
 
 	@field:SerializedName("page")
 	val page: Int? = null,
@@ -32,7 +32,7 @@ data class Support(
 	val url: String? = null
 )
 
-data class DataItem(
+data class UserResponseItem(
 
 	@field:SerializedName("last_name")
 	val lastName: String? = null,

@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -63,6 +64,10 @@ dependencies {
 
     //paging
     implementation(libs.androidx.paging.runtime.ktx)
+
+    //material
+    implementation (libs.material.v140)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

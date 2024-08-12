@@ -78,6 +78,17 @@
             android:layout_marginTop="-8dp" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_selected_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layout_heading"
+        app:layout_constraintBottom_toTopOf="@id/btn_search_user"
+        android:text="Selected User Name"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:fontFamily="@font/poppins_bold" />
+
     <com.project.suitmedia.component.CustomButton
         android:id="@+id/btn_search_user"
         android:layout_width="match_parent"
